@@ -15,6 +15,11 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+#IO {
+  display: none;
+}
+
+
 .ag-canvas {
   display: -webkit-flex;
   display: -ms-flexbox;

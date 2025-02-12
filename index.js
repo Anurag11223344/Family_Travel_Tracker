@@ -9,7 +9,7 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "world1",
-  password: "Anurag@123",
+  password: "Use Your Own Postgres Password",
   port: 5444,
 });
 db.connect();
@@ -20,8 +20,8 @@ app.use(express.static("public"));
 let currentUserId = 1;
 
 let users = [
-  { id: 1, name: "Angela", color: "teal" },
-  { id: 2, name: "Jack", color: "powderblue" },
+  { id: 1, name: "Anurag", color: "teal" },
+  { id: 2, name: "Anmol", color: "powderblue" },
 ];
 
 async function checkVisisted() {
@@ -74,7 +74,12 @@ app.post("/add", async (req, res) => {
       });
     }
 
-    const countryCode = countryResult.rows[0].country_code;
+    let countryCode = countryResult.rows[0].country_code;
+
+    if (countryCode === "IO") {
+      console.log("Detected IO, replacing with IN");
+      countryCode = "IN";
+    }
 
     // Check if the country is already in visited_countries
     const visitedResult = await db.query(
